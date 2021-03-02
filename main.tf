@@ -18,6 +18,11 @@ provider "azurerm" {
     features {}
 }
 
+variable "imagebuild" {
+    type        = string
+    description = "Latest Image Build"
+}
+
 resource "azurerm_resource_group" "rg" {
     name     = "rg-iacdemo"
     location = "westus2"
@@ -34,7 +39,7 @@ resource "azurerm_container_group" "cg" {
 
     container {
         name   = "weatherapi"
-        image  = "mackster/weatherapi"
+        image  = "mackster/weatherapi:${var.imagebuild}"
         cpu    = "1"
         memory = "1"
 
